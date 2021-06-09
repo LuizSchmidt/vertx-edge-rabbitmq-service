@@ -1,5 +1,7 @@
 package com.vertx.edge.rabbitmq.helper;
 
+import java.util.Locale;
+
 import com.vertx.edge.rabbitmq.helper.declare.Exchange;
 import com.vertx.edge.rabbitmq.helper.declare.Queue;
 import com.vertx.edge.utils.CompositeFutureBuilder;
@@ -47,7 +49,7 @@ public class RabbitMQHelper {
   }
 
   public Future<Void> declare(Exchange exchange) {
-    return client.exchangeDeclare(exchange.getName(), exchange.getType().name(), exchange.isDurable(),
+    return client.exchangeDeclare(exchange.getName(), exchange.getType().name().toLowerCase(Locale.getDefault()), exchange.isDurable(),
         exchange.isAutoDelete(), exchange.getArguments());
   }
 

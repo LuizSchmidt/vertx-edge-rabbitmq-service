@@ -1,5 +1,7 @@
 package com.vertx.edge.rabbitmq.verticle;
 
+import java.util.Objects;
+
 import com.vertx.edge.utils.VoidFuture;
 
 import io.vertx.core.Future;
@@ -27,6 +29,8 @@ public abstract class RabbitMQListenerVerticle extends RabbitMQVerticle {
   }
 
   private Future<Void> startListening() {
+    Objects.requireNonNull(this.queue, "queue cannot be null");
+    
     return this.rabbitmq.basicConsumer(this.queue.getName(), getQueueOptions())
         .onSuccess(consumer -> {
           log.info("Listening rabbitmq queue {}...", this.queue.getName());

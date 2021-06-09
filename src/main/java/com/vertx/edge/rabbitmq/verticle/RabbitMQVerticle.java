@@ -1,7 +1,5 @@
 package com.vertx.edge.rabbitmq.verticle;
 
-import java.util.Objects;
-
 import com.vertx.edge.rabbitmq.RabbitMQService;
 import com.vertx.edge.rabbitmq.helper.RabbitMQHelper;
 import com.vertx.edge.rabbitmq.helper.declare.Exchange;
@@ -37,7 +35,6 @@ public abstract class RabbitMQVerticle extends BaseVerticle {
       this.bind = config().getBoolean("bind", Boolean.TRUE);
       this.routingKey = config().getString("routingKey");
 
-      Objects.requireNonNull(queue, "Missing configuration 'queue'.");
       return this.connect();
     }).onSuccess(client -> promise.complete()).onFailure(promise::fail);
   }
